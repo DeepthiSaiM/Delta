@@ -1,0 +1,70 @@
+{
+  "test_cases": [
+    {
+      "test_case_name": "test_get_user_by_id",
+      "description": "Verify the GET /users/{id} endpoint returns the correct user details for a valid user ID.",
+      "input_parameters": {
+        "method": "GET",
+        "endpoint": "/users/{id}",
+        "path_parameters": {
+          "id": "123"
+        },
+        "headers": {
+          "Authorization": "Bearer <token>"
+        }
+      },
+      "expected_output": {
+        "status_code": 200,
+        "response_body": {
+          "id": 123,
+          "name": "John Doe",
+          "email": "johndoe@example.com"
+        },
+        "response_headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "assertions": [
+        "assert response.status_code == 200",
+        "assert response.json()['id'] == 123",
+        "assert response.json()['name'] == 'John Doe'",
+        "assert response.json()['email'] == 'johndoe@example.com'",
+        "assert response.headers['Content-Type'] == 'application/json'"
+      ]
+    },
+    {
+      "test_case_name": "test_create_user",
+      "description": "Verify the POST /users endpoint creates a new user and returns the created user details.",
+      "input_parameters": {
+        "method": "POST",
+        "endpoint": "/users",
+        "headers": {
+          "Authorization": "Bearer <token>",
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "name": "Jane Doe",
+          "email": "janedoe@example.com"
+        }
+      },
+      "expected_output": {
+        "status_code": 201,
+        "response_body": {
+          "id": 124,
+          "name": "Jane Doe",
+          "email": "janedoe@example.com"
+        },
+        "response_headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "assertions": [
+        "assert response.status_code == 201",
+        "assert response.json()['id'] == 124",
+        "assert response.json()['name'] == 'Jane Doe'",
+        "assert response.json()['email'] == 'janedoe@example.com'",
+        "assert response.headers['Content-Type'] == 'application/json'"
+      ]
+    }
+  ]
+}
