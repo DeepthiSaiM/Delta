@@ -1,0 +1,76 @@
+[
+  {
+    "test_case_name": "test_get_user_by_id",
+    "description": "Verify the GET /users/{id} API endpoint returns the correct user details for a valid user ID.",
+    "input_parameters": {
+      "method": "GET",
+      "endpoint": "/users/{id}",
+      "path_parameters": {
+        "id": "123"
+      },
+      "headers": {
+        "Authorization": "Bearer <token>"
+      }
+    },
+    "expected_output": {
+      "status_code": 200,
+      "response_body": {
+        "id": 123,
+        "name": "John Doe",
+        "email": "john.doe@example.com"
+      }
+    },
+    "assertions": [
+      {
+        "type": "status_code",
+        "expected": 200
+      },
+      {
+        "type": "response_body",
+        "expected": {
+          "id": 123,
+          "name": "John Doe",
+          "email": "john.doe@example.com"
+        }
+      }
+    ]
+  },
+  {
+    "test_case_name": "test_create_user",
+    "description": "Verify the POST /users API endpoint creates a new user and returns the correct response.",
+    "input_parameters": {
+      "method": "POST",
+      "endpoint": "/users",
+      "headers": {
+        "Authorization": "Bearer <token>",
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "name": "Jane Doe",
+        "email": "jane.doe@example.com"
+      }
+    },
+    "expected_output": {
+      "status_code": 201,
+      "response_body": {
+        "id": 124,
+        "name": "Jane Doe",
+        "email": "jane.doe@example.com"
+      }
+    },
+    "assertions": [
+      {
+        "type": "status_code",
+        "expected": 201
+      },
+      {
+        "type": "response_body",
+        "expected": {
+          "id": 124,
+          "name": "Jane Doe",
+          "email": "jane.doe@example.com"
+        }
+      }
+    ]
+  }
+]
