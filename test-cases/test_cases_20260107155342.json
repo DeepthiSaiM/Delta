@@ -1,0 +1,88 @@
+{
+  "test_cases": [
+    {
+      "test_case_id": "TC001",
+      "description": "Test to verify the creation of a new employee",
+      "input": {
+        "endpoint": "/api/employees",
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer <token>"
+        },
+        "body": {
+          "name": "John Doe",
+          "age": 30,
+          "department": "Engineering"
+        }
+      },
+      "expected_output": {
+        "status_code": 201,
+        "response_body": {
+          "id": "auto-generated",
+          "name": "John Doe",
+          "age": 30,
+          "department": "Engineering"
+        }
+      },
+      "assertions": [
+        "assert response.status_code == 201",
+        "assert response.json()['name'] == 'John Doe'",
+        "assert response.json()['age'] == 30",
+        "assert response.json()['department'] == 'Engineering'"
+      ]
+    },
+    {
+      "test_case_id": "TC002",
+      "description": "Test to verify fetching details of an existing employee",
+      "input": {
+        "endpoint": "/api/employees/{employee_id}",
+        "method": "GET",
+        "headers": {
+          "Authorization": "Bearer <token>"
+        },
+        "path_parameters": {
+          "employee_id": 123
+        }
+      },
+      "expected_output": {
+        "status_code": 200,
+        "response_body": {
+          "id": 123,
+          "name": "John Doe",
+          "age": 30,
+          "department": "Engineering"
+        }
+      },
+      "assertions": [
+        "assert response.status_code == 200",
+        "assert response.json()['id'] == 123",
+        "assert response.json()['name'] == 'John Doe'",
+        "assert response.json()['age'] == 30",
+        "assert response.json()['department'] == 'Engineering'"
+      ]
+    },
+    {
+      "test_case_id": "TC003",
+      "description": "Test to verify deletion of an employee",
+      "input": {
+        "endpoint": "/api/employees/{employee_id}",
+        "method": "DELETE",
+        "headers": {
+          "Authorization": "Bearer <token>"
+        },
+        "path_parameters": {
+          "employee_id": 123
+        }
+      },
+      "expected_output": {
+        "status_code": 204,
+        "response_body": null
+      },
+      "assertions": [
+        "assert response.status_code == 204",
+        "assert response.text == ''"
+      ]
+    }
+  ]
+}
